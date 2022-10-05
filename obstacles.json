@@ -1,0 +1,58 @@
+{
+    "bush_0" : {
+        "path" : "Sprites\\Obstacles\\bush_0.png",
+        "scale_multiplier" : 3,
+        "size" : {
+            "w" : 48,
+            "h" : 32
+        },
+        "hitbox" : {
+            "x" : 18,
+            "y" : 0,
+            "w" : 36,
+            "h" : 20
+        }
+    },
+    "bush_1" : {
+        "path" : "Sprites\\Obstacles\\bush_1.png",
+        "scale_multiplier" : 2.8,
+        "size" : {
+            "w" : 48,
+            "h" : 32
+        },
+        "hitbox" : {
+            "x" : 12,
+            "y" : 0,
+            "w" : 24,
+            "h" : 15
+        }
+    },
+    "rock_0" : {
+        "path" : "Sprites\\Obstacles\\rock_0.png",
+        "scale_multiplier" : 3,
+        "size" : {
+            "w" : 48,
+            "h" : 32
+        },
+        "hitbox" : {
+            "x" : 17.5,
+            "y" : 0,
+            "w" : 36,
+            "h" : 21
+        }
+    },
+    "rock_1" : {
+        "path" : "Sprites\\Obstacles\\rock_1.png",
+        "scale_multiplier" : 3,
+        "size" : {
+            "w" : 48,
+            "h" : 32
+        },
+        "hitbox" : {
+            "x" : 21,
+            "y" : 0,
+            "w" : 42,
+            "h" : 25
+        }
+    }
+}
