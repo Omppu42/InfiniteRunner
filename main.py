@@ -55,6 +55,7 @@ def get_input(event, player, gameManager):
     if keys[pygame.K_SPACE]:
         player.falling = False
         Player.jump_key_held = True
+        
     else: 
         player.falling = True
         Player.jump_key_held = False

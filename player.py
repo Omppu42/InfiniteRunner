@@ -9,8 +9,17 @@ player_gravity = Gravity(6, 6)
 class Player:
     jump_height = 45
     jump_speed = 6
+
     jump_sprites = load_sprites("Assets\\Images\\Jump\\", "adventurer-jump-0", 2, ".png")
     run_sprites = load_sprites("Assets\\Images\\Run\\", "adventurer-run-0", 6, ".png")
+
+    run_sound = pygame.mixer.Sound("Assets\\Sounds\\run.wav")
+    jump_sound = pygame.mixer.Sound("Assets\\Sounds\\jump.wav")
+    jump_sound.set_volume(0.3)
+    land_sound = pygame.mixer.Sound("Assets\\Sounds\\land.wav")
+    land_sound.set_volume(0.3)
+    death_sound = pygame.mixer.Sound("Assets\\Sounds\\death.wav")
+
     show_hitbox = -1 #1:on, -1:off
     jump_key_held = False
 
@@ -28,14 +37,20 @@ class Player:
         self.animation_image = 0
         self.screen = screen
         self.falling = False
+        self.run_channel = pygame.mixer.Channel(1)
+        self.jump_channel = pygame.mixer.Channel(2)
+        self.land_channel = pygame.mixer.Channel(3)
+        self.death_channel = pygame.mixer.Channel(4)
+        self.played_land_sound = True
 
 
     def restart(self):
-        self.y = self.ground_y
+        self.y = self.ground_y-1
         self.image = Player.run_sprites[0]
         self.animation_frame = 0
         self.animation_image = 0
         self.jump_key_held = False
+        self.falling = True
         self.dy = 0
 
     def detect_collision(self, obs_hitbox):
@@ -48,6 +63,8 @@ class Player:
         collide = player_rect.colliderect(obs_rect)
         
         if collide:
+            if not self.death_channel.get_busy():
+                self.death_channel.play(Player.death_sound)
             self.gameManager.game_state = Gamestate.DED
 
 
@@ -86,13 +103,25 @@ class Player:
 
 
     def player_on_ground(self):
-        if not self.on_ground(): return
+        if not self.on_ground(): 
+            self.run_channel.stop()
+            return
+
+        if not self.run_channel.get_busy(): #run sounds
+            self.run_channel.play(Player.run_sound)
 
         self.falling = False
+        if self.played_land_sound == False and not self.land_channel.get_busy():
+            self.land_channel.play(Player.land_sound)
+            self.played_land_sound = True
         player_gravity.reset_gravity()
         self.dy = 0
 
         if Player.jump_key_held:
+            self.played_land_sound = False
+            if not self.jump_channel.get_busy(): #jump sounds
+                self.jump_channel.play(Player.jump_sound)
+
             self.dy = Player.jump_speed
             player_gravity.start_dy = Player.jump_speed
 
