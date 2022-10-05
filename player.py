@@ -14,10 +14,9 @@ class Player:
     run_sprites = load_sprites("Assets\\Images\\Run\\", "adventurer-run-0", 6, ".png")
 
     run_sound = pygame.mixer.Sound("Assets\\Sounds\\run.wav")
+    run_sound.set_volume(0.4)
     jump_sound = pygame.mixer.Sound("Assets\\Sounds\\jump.wav")
-    jump_sound.set_volume(0.3)
-    land_sound = pygame.mixer.Sound("Assets\\Sounds\\land.wav")
-    land_sound.set_volume(0.3)
+    jump_sound.set_volume(1)
     death_sound = pygame.mixer.Sound("Assets\\Sounds\\death.wav")
 
     show_hitbox = -1 #1:on, -1:off
@@ -37,11 +36,9 @@ class Player:
         self.animation_image = 0
         self.screen = screen
         self.falling = False
-        self.run_channel = pygame.mixer.Channel(1)
-        self.jump_channel = pygame.mixer.Channel(2)
-        self.land_channel = pygame.mixer.Channel(3)
-        self.death_channel = pygame.mixer.Channel(4)
-        self.played_land_sound = True
+        self.run_channel = pygame.mixer.Channel(0)
+        self.jump_channel = pygame.mixer.Channel(1)
+        self.death_channel = pygame.mixer.Channel(2)
 
 
     def restart(self):
@@ -111,9 +108,6 @@ class Player:
             self.run_channel.play(Player.run_sound)
 
         self.falling = False
-        if self.played_land_sound == False and not self.land_channel.get_busy():
-            self.land_channel.play(Player.land_sound)
-            self.played_land_sound = True
         player_gravity.reset_gravity()
         self.dy = 0
 

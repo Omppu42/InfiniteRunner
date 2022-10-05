@@ -87,6 +87,9 @@ def main():
     player = Player(GROUND_Y, screen, gameManager)
     bg_pieces = load_bg_pieces(screen)
     clock = pygame.time.Clock()
+    music = pygame.mixer.music.load("Assets\\Sounds\\music.mp3")
+    pygame.mixer.music.set_volume(0.4)
+    pygame.mixer.music.play(-1)
 
     running = True
     while running:
