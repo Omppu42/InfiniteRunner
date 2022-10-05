@@ -58,17 +58,19 @@ def get_input(event, player, gameManager):
         Player.jump_key_held = False
 
     if event.type == pygame.KEYDOWN:
-        if keys[pygame.K_h]:
+        if event.key == pygame.K_h:
             Player.show_hitbox *= -1
             Obstacle.show_hitbox *= -1
-        if keys[pygame.K_f]:
+
+        if event.key == pygame.K_f:
             util.debug.draw_fps_b *= -1
 
-        if keys[pygame.K_ESCAPE]:
+        if event.key == pygame.K_ESCAPE:
             gameManager.paused *= -1
             if gameManager.paused == 1:
                 gameManager.pause_time += (time.time()-gameManager.pause_time_start)
                 gameManager.game_state = game_manager.Gamestate.PLAY
+
             elif gameManager.paused == -1:
                 gameManager.pause_time_start = time.time()
                 gameManager.game_state = game_manager.Gamestate.PAUSED
