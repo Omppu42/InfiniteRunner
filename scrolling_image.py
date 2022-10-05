@@ -20,7 +20,6 @@ class ScrollingImage:
         self.images = []
         self.to_remove = [] #images to remove
 
-
         for i in range(image_count):
             self.append_bgpiece((self.size_w)*i, self.y)
 
@@ -39,11 +38,9 @@ class ScrollingImage:
         self.bg_image.set_alpha(alpha)
         self.bg_image.fill((darkness,darkness,darkness), special_flags=pygame.BLEND_RGB_SUB)
 
-
     def restart(self):
         for i, x in enumerate(self.images):
             x.x = self.size_w*i
-
 
     def append_bgpiece(self, x, y):
         self.images.append(BGPiece(self.bg_image, self.scroll_speed, x, y, self.bg_array_bool))
@@ -63,6 +60,7 @@ class ScrollingImage:
             self.images.remove(x)
             self.to_remove.remove(x)
             self.append_bgpiece(self.images[len(self.images)-1].x+self.size_w, self.y) #append new one behind last
+
 
 class BGPiece:
     def __init__(self, image, speed, start_x, y, randomize):

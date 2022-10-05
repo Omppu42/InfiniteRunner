@@ -77,7 +77,6 @@ class Player:
 
         self.screen.blit(self.image, player_rect)
         
-
         if Player.show_hitbox == 1:
             draw_hitboxes(self.screen, self.hitbox)
 
@@ -96,6 +95,7 @@ class Player:
         if Player.jump_key_held:
             self.dy = Player.jump_speed
             player_gravity.start_dy = Player.jump_speed
+
 
     def jump(self):
         self.player_on_ground()

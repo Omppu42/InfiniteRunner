@@ -29,22 +29,24 @@ def update_play(player, screen, gameManager):
 
 
 def play(player, gameManager, screen, bg_pieces, clock):
-    if gameManager.game_state is not game_manager.Gamestate.PLAY:
-        for x in bg_pieces:
-            x.draw()
+    for x in bg_pieces: #BG
+        x.draw() 
 
-    if gameManager.game_state is game_manager.Gamestate.PLAY:
-        for x in bg_pieces:
-            x.draw()
-            x.update()  
-        update_play(player, screen, gameManager)
-        player.jump()
-        player.animate()
+        if gameManager.game_state is not game_manager.Gamestate.PLAY: continue
+        x.update()
 
-    gameManager.update(player, Player, Obstacle, bg_pieces)
-    if util.debug.draw_fps_b == 1:
+    if util.debug.draw_fps_b == 1: #FPS counter
         util.debug.draw_fps(screen, clock, SCR_WIDTH)
+
+    gameManager.update(player, Player, Obstacle, bg_pieces) #update
     player.draw()
+    
+    if gameManager.game_state is not game_manager.Gamestate.PLAY: return
+
+    update_play(player, screen, gameManager) #update when play
+    player.jump()
+    player.animate()
+
     pygame.display.update()
 
 
@@ -57,23 +59,24 @@ def get_input(event, player, gameManager):
         player.falling = True
         Player.jump_key_held = False
 
-    if event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_h:
-            Player.show_hitbox *= -1
-            Obstacle.show_hitbox *= -1
+    if event.type != pygame.KEYDOWN: return #continue if keydown
 
-        if event.key == pygame.K_f:
-            util.debug.draw_fps_b *= -1
+    if event.key == pygame.K_h:
+        Player.show_hitbox *= -1
+        Obstacle.show_hitbox *= -1
 
-        if event.key == pygame.K_ESCAPE:
-            gameManager.paused *= -1
-            if gameManager.paused == 1:
-                gameManager.pause_time += (time.time()-gameManager.pause_time_start)
-                gameManager.game_state = game_manager.Gamestate.PLAY
+    if event.key == pygame.K_f:
+        util.debug.draw_fps_b *= -1
 
-            elif gameManager.paused == -1:
-                gameManager.pause_time_start = time.time()
-                gameManager.game_state = game_manager.Gamestate.PAUSED
+    if event.key == pygame.K_ESCAPE:
+        gameManager.paused *= -1
+        if gameManager.paused == 1:
+            gameManager.pause_time += (time.time()-gameManager.pause_time_start)
+            gameManager.game_state = game_manager.Gamestate.PLAY
+            return
+
+        gameManager.pause_time_start = time.time()
+        gameManager.game_state = game_manager.Gamestate.PAUSED
 
 
 

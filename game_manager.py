@@ -35,10 +35,10 @@ class GameManager:
 
         text = self.font.render(str(self.score), True, (255,0,0)) #score
         self.screen.blit(text, (10,10))
+        for x in self.obstacles:
+            x.draw()
         
         if self.game_state is Gamestate.PAUSED:
-            for x in self.obstacles:
-                x.draw()
             text_str = "PAUSED"
             text = self.font.render(text_str, True, (200,0,0))
             text_size = self.font.size(text_str)
