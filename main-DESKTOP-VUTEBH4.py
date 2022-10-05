@@ -2,8 +2,7 @@ import pygame, time, random, os, sys
 from obstacle import Obstacle
 from player import Player
 from scrolling_image import ScrollingImage
-from util.util import load_sprites
-import util.debug
+from util import load_sprites
 from load_sidescroll_textures import load_bg_pieces
 import game_manager
 pygame.init()
@@ -12,8 +11,9 @@ SCR_WIDTH = 600
 SCR_HEIGHT = 400
 GROUND_Y = SCR_HEIGHT/4*3
 FPS_CAP = 60
-#TODO: audio and sfx
-#TODO: death animation
+#TODO: new player sprite
+#TODO: github
+
 
 def update_play(player, screen, gameManager):
     to_remove = [] #delete obtacles after reaching end of screen
@@ -28,7 +28,7 @@ def update_play(player, screen, gameManager):
         gameManager.obstacles.remove(y)
 
 
-def play(player, gameManager, screen, bg_pieces, clock):
+def play(player, gameManager, screen, bg_pieces):
     if gameManager.game_state is not game_manager.Gamestate.PLAY:
         for x in bg_pieces:
             x.draw()
@@ -42,8 +42,7 @@ def play(player, gameManager, screen, bg_pieces, clock):
         player.animate()
 
     gameManager.update(player, Player, Obstacle, bg_pieces)
-    if util.debug.draw_fps_b == 1:
-        util.debug.draw_fps(screen, clock, SCR_WIDTH)
+
     player.draw()
     pygame.display.update()
 
@@ -61,9 +60,6 @@ def get_input(event, player, gameManager):
         if keys[pygame.K_h]:
             Player.show_hitbox *= -1
             Obstacle.show_hitbox *= -1
-        if keys[pygame.K_f]:
-            util.debug.draw_fps_b *= -1
-
         if keys[pygame.K_ESCAPE]:
             gameManager.paused *= -1
             if gameManager.paused == 1:
@@ -80,7 +76,11 @@ def main():
     gameManager = game_manager.GameManager(screen, GROUND_Y)
     player = Player(GROUND_Y, screen, gameManager)
     bg_pieces = load_bg_pieces(screen)
+    
     clock = pygame.time.Clock()
+    # test_obstacles = []
+    # for i in range(1, 10):
+    #     test_obstacles.append(Obstacle(30*i, 0, screen, GROUND_Y, 100))
 
     running = True
     while running:
@@ -89,8 +89,11 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             get_input(event, player, gameManager)
- 
-        play(player, gameManager, screen, bg_pieces, clock)
+         
+        # for x in test_obstacles:
+        #     x.draw()
+
+        play(player, gameManager, screen, bg_pieces)
         clock.tick(FPS_CAP)
         pygame.display.update()
         

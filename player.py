@@ -1,16 +1,16 @@
 import pygame, random, time
-from util import load_sprites, Gravity
+from util.util import load_sprites, Gravity
 from game_manager import Gamestate
-from debug_code import draw_hitboxes
+from util.debug import draw_hitboxes
 pygame.init()
 
-player_gravity = Gravity(5, 6)
+player_gravity = Gravity(6, 6)
 
 class Player:
-    jump_height = 50
-    jump_speed = 5
-    jump_sprites = load_sprites("Sprites\\Jump\\", "adventurer-jump-0", 2, ".png")
-    run_sprites = load_sprites("Sprites\\Run\\", "adventurer-run-0", 6, ".png")
+    jump_height = 45
+    jump_speed = 6
+    jump_sprites = load_sprites("Assets\\Images\\Jump\\", "adventurer-jump-0", 2, ".png")
+    run_sprites = load_sprites("Assets\\Images\\Run\\", "adventurer-run-0", 6, ".png")
     show_hitbox = -1 #1:on, -1:off
     jump_key_held = False
 

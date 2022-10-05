@@ -91,7 +91,7 @@ class GameManager:
 
     def get_highscore(self) -> tuple:
         highscore = 0
-        with open("highscore.txt", "r") as f:
+        with open("data\\highscore.txt", "r") as f:
             highscore = f.readline()
 
             if highscore != "":
@@ -108,7 +108,7 @@ class GameManager:
 
 
     def set_new_highscore(self):
-        with open("highscore.txt", "w") as f:
+        with open("data\\highscore.txt", "w") as f:
             f.write(str(self.score))
 
 

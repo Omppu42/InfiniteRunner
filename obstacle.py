@@ -1,12 +1,12 @@
 import pygame, random, math, json
-from debug_code import draw_hitboxes
-from util import load_sprites
+from util.debug import draw_hitboxes
+from util.util import load_sprites
 pygame.init()
 
 
 def load_obstacles() -> list:
     data_lst = []
-    data = json.load(open("obstacles.json", "r"))
+    data = json.load(open("data\\obstacles.json", "r"))
     for x in data:
         data_lst.append(data[x])
     return data_lst

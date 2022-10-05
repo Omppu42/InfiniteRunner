@@ -1,6 +1,6 @@
 {
     "bush_0" : {
-        "path" : "Sprites\\Obstacles\\bush_0.png",
+        "path" : "Assets\\Images\\Obstacles\\bush_0.png",
         "scale_multiplier" : 3,
         "size" : {
             "w" : 48,
@@ -14,7 +14,7 @@
         }
     },
     "bush_1" : {
-        "path" : "Sprites\\Obstacles\\bush_1.png",
+        "path" : "Assets\\Images\\Obstacles\\bush_1.png",
         "scale_multiplier" : 2.8,
         "size" : {
             "w" : 48,
@@ -28,7 +28,7 @@
         }
     },
     "rock_0" : {
-        "path" : "Sprites\\Obstacles\\rock_0.png",
+        "path" : "Assets\\Images\\Obstacles\\rock_0.png",
         "scale_multiplier" : 3,
         "size" : {
             "w" : 48,
@@ -42,7 +42,7 @@
         }
     },
     "rock_1" : {
-        "path" : "Sprites\\Obstacles\\rock_1.png",
+        "path" : "Assets\\Images\\Obstacles\\rock_1.png",
         "scale_multiplier" : 3,
         "size" : {
             "w" : 48,
