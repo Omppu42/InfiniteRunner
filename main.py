@@ -12,8 +12,6 @@ SCR_WIDTH = 600
 SCR_HEIGHT = 400
 GROUND_Y = SCR_HEIGHT/4*3
 FPS_CAP = 60
-#TODO: audio and sfx
-#TODO: death animation
 
 def update_play(player, screen, gameManager):
     to_remove = [] #delete obtacles after reaching end of screen
@@ -85,10 +83,10 @@ def main():
     screen = pygame.display.set_mode((SCR_WIDTH, SCR_HEIGHT))
     gameManager = game_manager.GameManager(screen, GROUND_Y)
     player = Player(GROUND_Y, screen, gameManager)
-    bg_pieces = load_bg_pieces(screen)
+    bg_pieces = load_bg_pieces(screen, GROUND_Y)
     clock = pygame.time.Clock()
     music = pygame.mixer.music.load("Assets\\Sounds\\music.mp3")
-    pygame.mixer.music.set_volume(0.4)
+    pygame.mixer.music.set_volume(0.3)
     pygame.mixer.music.play(-1)
 
     running = True

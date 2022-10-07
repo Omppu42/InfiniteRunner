@@ -1,5 +1,6 @@
 import pygame, time, sys
 from enum import Enum
+from util.util import get_highscore
 pygame.init()
 
 class Gamestate(Enum):
@@ -51,7 +52,7 @@ class GameManager:
 
 
     def dead_func(self, player):
-        hihgscore = self.get_highscore()
+        hihgscore = get_highscore(self.score)
 
         text_str = "YOU DIED"
         text = self.big_font.render(text_str, True, (200,0,0))
@@ -88,29 +89,6 @@ class GameManager:
                 if event.key == pygame.K_r:
                     break
         
-
-    def get_highscore(self) -> tuple:
-        highscore = 0
-        with open("data\\highscore.txt", "r") as f:
-            highscore = f.readline()
-
-            if highscore != "":
-                highscore = int(highscore)
-            else: 
-                print("no previous highscore")
-                highscore = 0   
-
-        if self.score > highscore:
-            self.set_new_highscore()
-            return (self.score, True) #new highscore
-
-        return (highscore, False)
-
-
-    def set_new_highscore(self):
-        with open("data\\highscore.txt", "w") as f:
-            f.write(str(self.score))
-
 
     def restart_game(self, player, PlayerCls, bg_pieces, ObstacleCls):
         GameManager.obs_spawn_delay = GameManager.start_obs_spawn_delay

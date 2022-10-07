@@ -35,3 +35,26 @@ def load_sprites(folder, sprite_name, sprite_count, image_extension) -> list:
     for i in range(sprite_count):
         sprites.append(pygame.image.load(sprite_path+str(i)+image_extension))
     return sprites
+
+
+def get_highscore(score) -> tuple: #returns score and bool was new highscore or not
+    highscore = 0
+    with open("data\\highscore.txt", "r") as f:
+        highscore = f.readline()
+
+        if highscore != "":
+            highscore = int(highscore)
+        else: 
+            print("no previous highscore")
+            highscore = 0   
+
+    if score > highscore:
+        set_new_highscore(score)
+        return (score, True) #new highscore
+
+    return (highscore, False)
+
+
+def set_new_highscore(score):
+    with open("data\\highscore.txt", "w") as f:
+        f.write(str(score))

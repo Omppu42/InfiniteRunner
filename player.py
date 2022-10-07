@@ -14,13 +14,19 @@ class Player:
     run_sprites = load_sprites("Assets\\Images\\Run\\", "adventurer-run-0", 6, ".png")
 
     run_sound = pygame.mixer.Sound("Assets\\Sounds\\run.wav")
-    run_sound.set_volume(0.4)
+    run_sound.set_volume(0.2)
     jump_sound = pygame.mixer.Sound("Assets\\Sounds\\jump.wav")
     jump_sound.set_volume(1)
     death_sound = pygame.mixer.Sound("Assets\\Sounds\\death.wav")
 
     show_hitbox = -1 #1:on, -1:off
     jump_key_held = False
+    
+    # for i in range(len(jump_sprites)):
+    #     jump_sprites[i] = pygame.transform.scale(jump_sprites[i], (100, 74))
+    
+    # for i in range(len(run_sprites)):
+    #     run_sprites[i] = pygame.transform.scale(run_sprites[i], (100, 74))
 
     def __init__(self, ground_y, screen, gameManager):
         self.image = Player.run_sprites[0]
@@ -108,7 +114,7 @@ class Player:
             self.run_channel.play(Player.run_sound)
 
         self.falling = False
-        player_gravity.reset_gravity()
+        player_gravity.reset_gravity()  #FIXME: Reset gravity when reached peak in jumo
         self.dy = 0
 
         if Player.jump_key_held:

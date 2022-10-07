@@ -3,7 +3,7 @@ from util.util import load_sprites
 from scrolling_image import ScrollingImage
 pygame.init()
 
-def load_bg_pieces(screen) -> list:
+def load_bg_pieces(screen, ground_y) -> list:
     bg_pieces = []
     
     bg_image = load_sprites("Assets\\Images\\Background\\", "sky", None, ".png")
@@ -22,12 +22,12 @@ def load_bg_pieces(screen) -> list:
     bg_pieces.append(ScrollingImage(bg_image, (600, 200), 3, screen, 3, 200))
 
     bg_image = load_sprites("Assets\\Images\\Ground\\", "ground_2", None, ".png")
-    bg_pieces.append(ScrollingImage(bg_image, (48,48), 6, screen, 15, 300))
+    bg_pieces.append(ScrollingImage(bg_image, (48,48), 6, screen, 15, ground_y))
 
     bg_image = load_sprites("Assets\\Images\\Ground\\", "ground_11", None, ".png") 
-    bg_pieces.append(ScrollingImage(bg_image, (64, 64), 6, screen, 15, 348))
+    bg_pieces.append(ScrollingImage(bg_image, (64,64), 6, screen, 15, ground_y+48))
 
     bg_image = load_sprites("Assets\\Images\\Ground\\", "grass_1", None, ".png") 
-    bg_pieces.append(ScrollingImage(bg_image, (48, 48), 6, screen, 15, 300))
+    bg_pieces.append(ScrollingImage(bg_image, (48, 48), 6, screen, 15, ground_y))
     
     return bg_pieces
